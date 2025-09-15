@@ -1,14 +1,11 @@
 # tests/testthat/test-data_manager.R
 
-# Test တွေ run နိုင်ဖို့ လိုအပ်တဲ့ package တွေ load လုပ်ပါ
 library(testthat)
 library(dplyr)
 library(R6)
 
-# DataManager class ကို load လုပ်ပါ (File path မှန်အောင် သေချာစစ်ပါ)
 source(file.path("..", "..", "R", "data_manager.R"))
 
-# Test အတွက် data dummy ဖန်တီးပါ
 create_test_data <- function() {
   df <- data.frame(
     id = 1:5,
@@ -16,7 +13,7 @@ create_test_data <- function() {
     date = as.Date(c("2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05")),
     type = c("Water", "Electricity", "Water", "Gas", "Electricity"),
     value = c(100, 200, 150, 300, 250),
-    emissions = c(10, 20, 15, 30, 25) # Give it a temporary, simple name
+    emissions = c(10, 20, 15, 30, 25)
   )
 
   # Then, set the column names using a vector
@@ -28,11 +25,8 @@ create_test_data <- function() {
 test_that("calculate_kpis returns correct values", {
   test_df <- create_test_data()
 
-  # DataManager object ကို ဖန်တီးပါ
   dm <- DataManager$new(test_df)
 
-  # calculate_kpis() ကို parameter မပါဘဲ ခေါ်ပါ
-  # ဒီ function က class ရဲ့ internal data (self$data) ကိုပဲ သုံးပါလိမ့်မယ်
   kpis <- dm$calculate_kpis()
 
   # Test for expected numeric values
