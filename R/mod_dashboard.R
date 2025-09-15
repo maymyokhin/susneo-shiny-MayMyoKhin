@@ -95,9 +95,9 @@ mod_dashboard_server <- function(id, data_reactive) {
     })
 
     kpis <- reactive({
-      req(filtered_data())
+      req(data_manager())
       # Use the calculate_kpis method from the R6 class
-      data_manager()$calculate_kpis(filtered_data())
+      data_manager()$calculate_kpis()
     })
 
     # Render the site selector UI dynamically
