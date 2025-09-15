@@ -124,8 +124,8 @@ mod_dashboard_server <- function(id, data_reactive) {
       paste("Total Emissions:", kpis()$total_emissions, "kg")
     })
 
-    output$avg_cost <- renderText({
-      paste("Avg Cost: $", kpis()$avg_cost)
+    output$avg_usage <- renderText({
+      paste("Avg Usage: $", kpis()$avg_usage)
     })
 
     # Render charts

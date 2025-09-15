@@ -26,7 +26,7 @@ DataManager <- R6::R6Class("DataManager",
                                kpis <- list(
                                  total_consumption = sum(df$value),
                                  total_emissions = sum(df$carbon_emission_kgco2e),
-                                 avg_cost = round(mean(df$value * 0.1), 2)
+                                 avg_usage = round(mean(df$value * 0.1), 2)
                                )
                                return(kpis)
                              }

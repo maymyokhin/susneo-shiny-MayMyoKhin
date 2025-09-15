@@ -22,36 +22,26 @@ mod_data_upload_ui <- function(id){
 #' data_upload Server Functions
 #'
 #' @noRd
-#' Data Upload Server Function
-#'
+# R/mod_data_upload_server.R
 mod_data_upload_server <- function(id){
   moduleServer(id, function(input, output, session) {
-
-    # Reactive value to store the uploaded data
     uploaded_data <- reactive({
-      req(input$file) # Require a file input
+      req(input$file)
 
       # Read the CSV file
       df <- readr::read_csv(input$file$datapath)
 
-      # Perform basic validation
-      required_cols <- c("id", "site", "date", "type", "value", "carbon emission in kgco2e")
+      # Rename the carbon emission column right after reading
+      names(df)[names(df) == "carbon emission in kgco2e"] <- "carbon_emission_kgco2e"
+
+      # Perform basic validation with the new column name
+      required_cols <- c("id", "site", "date", "type", "value", "carbon_emission_kgco2e")
       if (!all(required_cols %in% names(df))) {
         stop("Error: The uploaded CSV file is missing required columns.")
       }
 
-      # Rename the carbon emission column for consistency
-      names(df) <- stringr::str_replace_all(names(df), " ", "_")
-
       return(df)
     })
-
     return(uploaded_data)
   })
 }
-
-## To be copied in the UI
-# mod_data_upload_ui("data_upload_1")
-
-## To be copied in the server
-# mod_data_upload_server("data_upload_1")
