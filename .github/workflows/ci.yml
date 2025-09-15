@@ -20,10 +20,10 @@ jobs:
         with:
           r-version: '4.2'
 
-      - name: Install dependencies
+      - - name: Install dependencies
         run: |
-          install.packages("remotes")
-          remotes::install_deps(dependencies = TRUE)
+          Rscript -e 'install.packages("remotes")'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - name: R CMD check
         run: |
