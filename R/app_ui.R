@@ -6,14 +6,22 @@
 #' @noRd
 app_ui <- function(request) {
   tagList(
-    # Leave this function for adding external resources
     golem_add_external_resources(),
-    # Your application UI logic
     fluidPage(
-      golem::golem_welcome_page() # Remove this line to start building your UI
+      theme = shinythemes::shinytheme("flatly"),
+      h1("SUSNEO Shiny Dashboard"),
+
+      # Place data upload module here
+      mod_data_upload_ui("data_upload_1"),
+
+      hr(), # Add a horizontal line for separation
+
+      # Place dashboard module here
+      mod_dashboard_ui("dashboard_1")
     )
   )
 }
+
 
 #' Add external Resources to the Application
 #'
