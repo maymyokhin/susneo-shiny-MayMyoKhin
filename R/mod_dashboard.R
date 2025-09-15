@@ -29,10 +29,7 @@ mod_dashboard_ui <- function(id){
 
           # Multi-select dropdown for facilities (sites)
           # UI will be rendered dynamically in the server part
-          uiOutput(ns("site_selector")),
-
-          # Energy Type multi-select filter
-          uiOutput(ns("type_selector"))
+          uiOutput(ns("site_selector"))
         ),
 
         # Main Panel for displaying KPIs, charts, and table
@@ -50,15 +47,16 @@ mod_dashboard_ui <- function(id){
               textOutput(ns("total_emissions"))
             )),
             column(4, wellPanel(
-              h4("Average Usage"),
-              textOutput(ns("avg_usage"))
+              h4("Average Cost"),
+              textOutput(ns("avg_cost"))
             ))
           ),
 
           # Visualizations
           tabsetPanel(
             tabPanel("Time Series Analysis", plotlyOutput(ns("time_series_chart"))),
-            tabPanel("Facility Comparison", plotlyOutput(ns("comparison_chart")))
+            tabPanel("Facility Comparison", plotlyOutput(ns("comparison_chart"))),
+            tabPanel("Energy Type Comparison", plotlyOutput(ns("energy_type_chart")))
           ),
 
           # Data Table
@@ -115,6 +113,25 @@ mod_dashboard_server <- function(id, data_reactive) {
       )
     })
 
+    output$energy_type_chart <- plotly::renderPlotly({
+      req(filtered_data())
+
+      df <- filtered_data() %>%
+        dplyr::group_by(site, type) %>%
+        dplyr::summarise(total_value = sum(value), .groups = "drop")
+
+      # Stacked bar chart ဆွဲမယ်
+      p <- ggplot2::ggplot(df, ggplot2::aes(x = site, y = total_value, fill = type)) +
+        ggplot2::geom_bar(stat = "identity", position = "stack") +
+        ggplot2::labs(
+          title = "Total Consumption by Energy Type",
+          y = "Total Usage",
+          x = "Facility"
+        )
+
+      plotly::ggplotly(p)
+    })
+
     # Render KPIs
     output$total_consumption <- renderText({
       paste("Total Consumption:", kpis()$total_consumption, "units")
@@ -124,8 +141,8 @@ mod_dashboard_server <- function(id, data_reactive) {
       paste("Total Emissions:", kpis()$total_emissions, "kg")
     })
 
-    output$avg_usage <- renderText({
-      paste("Avg Usage: $", kpis()$avg_usage)
+    output$avg_cost <- renderText({
+      paste("Avg Cost: $", kpis()$avg_cost)
     })
 
     # Render charts
