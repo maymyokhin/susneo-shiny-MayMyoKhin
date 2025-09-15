@@ -6,9 +6,9 @@ This is an R Shiny dashboard built using the `golem` framework. It is designed t
 
 To run this application locally, you will need to have R and RStudio installed. Follow these steps:
 
-1.  **Clone the Repository**
+1.  **the Repository**
     ```bash
-    git clone [https://github.com/your-username/susneo_shiny_MayMyoKhin.git](https://github.com/your-username/susneo_shiny_MayMyoKhin.git)
+    [https://github.com/maymyokhin/susneo-shiny-MayMyoKhin.git](https://github.com/maymyokhin/susneo-shiny-MayMyoKhin.git)
     ```
 
 2.  **Open the Project in RStudio**
