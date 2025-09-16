@@ -1,10 +1,10 @@
+name: R-CMD-check
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
-name: R-CMD-check
 
 jobs:
   R-CMD-check:
@@ -18,16 +18,22 @@ jobs:
         with:
           r-version: '4.2'
 
-      # dependencies များကို install လုပ်ခြင်း
+
       - name: Install dependencies
         run: |
-          # Rscript -e ကိုအသုံးပြုပြီး R code ကို run ပါ။
-          Rscript -e 'install.packages("remotes")'
+          # Rscript -e
+          # remotes package
+          Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
+          # Install Package dependencies
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+          # golem::document_and_reload()
+          Rscript -e 'install.packages("roxygen2", repos = "https://cloud.r-project.org/")'
+          # devtools::check()
+          Rscript -e 'install.packages("devtools", repos = "https://cloud.r-project.org/")'
 
-      # R CMD check ကို run ခြင်း
       - name: R CMD check
         run: |
-          # Rscript -e ကိုအသုံးပြုပြီး R code ကို run ပါ။
+          # Rscript -e
           Rscript -e 'golem::document_and_reload()'
+          # R CMD check
           Rscript -e 'devtools::check()'
