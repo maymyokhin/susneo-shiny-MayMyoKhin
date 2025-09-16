@@ -27,16 +27,13 @@ jobs:
             libharfbuzz-dev libfribidi-dev libfreetype6-dev \
             libpng-dev libtiff5-dev libjpeg-dev
 
-      - name: Install remotes
-        run: Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
-
-      - name: Install devtools (with dependencies)
-        run: Rscript -e 'remotes::install_cran("devtools", dependencies = TRUE)'
+      - name: Setup R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::devtools
 
       - name: Run tests
         run: Rscript -e 'devtools::test()'
 
       - name: R CMD check
-        run: |
-          Rscript -e 'golem::document_and_reload()'
-          Rscript -e 'devtools::check()'
+        run: Rscript -e 'devtools::check()'
