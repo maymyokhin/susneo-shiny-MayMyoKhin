@@ -1,4 +1,8 @@
 # R/data_manager.R
+#' DataManager for R6 Class
+#'
+#' An R6 class for managing and processing energy data.
+#'
 #' @export
 #' @importFrom dplyr mutate filter
 #' @importFrom magrittr "%>%"

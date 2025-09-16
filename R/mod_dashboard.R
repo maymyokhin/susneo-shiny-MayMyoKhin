@@ -75,6 +75,8 @@ mod_dashboard_ui <- function(id){
 #' @importFrom dplyr filter summarise group_by
 #' @importFrom magrittr "%>%"
 
+utils::globalVariables(c("site","type","value","total_value"))
+
 mod_dashboard_server <- function(id, data_reactive) {
   moduleServer(id, function(input, output, session) {
 

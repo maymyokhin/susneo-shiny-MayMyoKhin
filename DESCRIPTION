@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "your@email.com")
 Description: What the package does (one paragraph).
-License: What license is it under?
+License: MIT
 Imports: 
     shiny,
     golem,
@@ -18,7 +18,8 @@ Imports:
     R6,
     DT,
     plotly,
-    ggplot2
+    ggplot2,
+    config
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
