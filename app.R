@@ -20,7 +20,7 @@ source(file.path("R", "mod_data_upload.R"))
 
 # Load sample data (for local testing purposes)
 sample_data <- readr::read_csv("data/SAMPLE_ASSIGNMENT_DATA.csv")
-names(sample_data)[names(sample_data) == "carbon emission in kgco2e"] <- "carbon_emission_kgco2e"
+#names(sample_data)[names(sample_data) == "carbon emission in kgco2e"] <- "carbon_emission_kgco2e"
 
 
 # Define the app's UI

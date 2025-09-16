@@ -9,15 +9,16 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: What license is it under?
 Imports: 
-    config,
-    dplyr,
-    ggplot2,
+    shiny,
     golem,
-    magrittr,
-    plotly,
-    R6,
+    shinythemes,
     readr,
-    shiny
+    dplyr,
+    magrittr,
+    R6,
+    DT,
+    plotly,
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

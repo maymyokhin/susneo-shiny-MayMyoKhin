@@ -10,7 +10,7 @@ DataManager <- R6::R6Class("DataManager",
                              initialize = function(df) {
                                self$data <- df %>%
                                  # Use dplyr::rename() to change the column name within the pipe
-                                 dplyr::rename(carbon_emission_kgco2e = `carbon emission in kgco2e`) %>%
+                                 #dplyr::rename(carbon_emission_kgco2e = `carbon emission in kgco2e`) %>%
                                  dplyr::mutate(
                                    date = as.Date(date, format = "%d-%m-%Y"),
                                    carbon_emission_kgco2e = as.numeric(carbon_emission_kgco2e)
@@ -42,7 +42,7 @@ DataManager <- R6::R6Class("DataManager",
                                  total_consumption = sum(df$value),
                                  # Access the correctly named column
                                  total_emissions = sum(df$carbon_emission_kgco2e),
-                                 avg_usage = round(mean(df$value), 2)
+                                 avg_cost = round(mean(df$value), 2)
                                )
                                return(kpis)
                              }

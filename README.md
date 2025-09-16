@@ -24,7 +24,7 @@ To run this application locally, you will need to have R and RStudio installed. 
 4.  **Run the App**
     -   After installing the packages, you can launch the application by running the `dev/run_dev.R` script in RStudio.
     ```R
-    golem::run_app()
+    shiny::runApp("app.R")
     # Or, you can simply source the dev/run_dev.R file
     ```
 
