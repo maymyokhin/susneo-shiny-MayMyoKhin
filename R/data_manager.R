@@ -1,7 +1,9 @@
 # R/data_manager.R
-#' DataManager for R6 Class
+#' @title DataManager R6 Class
 #'
-#' An R6 class for managing and processing energy data.
+#' @description An R6 class for managing and processing energy data.
+#'
+#' @field data A data frame containing the processed energy data.
 #'
 #' @export
 #' @importFrom dplyr mutate filter
@@ -11,6 +13,11 @@ DataManager <- R6::R6Class("DataManager",
                            public = list(
                              data = NULL,
 
+                             #' @description
+                             #' Initializes the DataManager object with a data frame.
+                             #'
+                             #' @param df A data frame to be processed. It should contain columns
+                             #'   `date`, `site`, `type`, `value`, and `carbon emission in kgco2e`.
                              initialize = function(df) {
                                self$data <- df %>%
                                  # Use dplyr::rename() to change the column name within the pipe
@@ -21,7 +28,13 @@ DataManager <- R6::R6Class("DataManager",
                                  )
                              },
 
-
+                             #' @description
+                             #' Filters the data based on a selected date range and sites.
+                             #'
+                             #' @param start_date The start date of the filter range.
+                             #' @param end_date The end date of the filter range.
+                             #' @param selected_sites A vector of site names to filter by.
+                             #' @return A filtered data frame.
                              filter_data = function(start_date, end_date, selected_sites) {
                                filtered_df <- self$data %>%
                                  dplyr::filter(
@@ -32,6 +45,10 @@ DataManager <- R6::R6Class("DataManager",
                                return(filtered_df)
                              },
 
+                             #' @description
+                             #' Calculates Key Performance Indicators (KPIs) from the data.
+                             #'
+                             #' @return A list containing the calculated KPIs.
                              calculate_kpis = function() { # No 'df' parameter
                                df <- self$data # Use the data stored in the class
                                if (nrow(df) == 0) {

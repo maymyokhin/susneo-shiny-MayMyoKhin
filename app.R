@@ -20,8 +20,6 @@ source(file.path("R", "mod_data_upload.R"))
 
 # Load sample data (for local testing purposes)
 sample_data <- readr::read_csv("data/SAMPLE_ASSIGNMENT_DATA.csv")
-#names(sample_data)[names(sample_data) == "carbon emission in kgco2e"] <- "carbon_emission_kgco2e"
-
 
 # Define the app's UI
 app_ui <- function(request) {
@@ -33,7 +31,6 @@ app_ui <- function(request) {
     mod_dashboard_ui("dashboard_1")
   )
 }
-
 
 # Define the app's server logic
 app_server <- function(input, output, session) {
